@@ -113,14 +113,27 @@ refinements = Forward()
 subTypeExp = Group(subTypeOps + expression)("subTypeExp")
 nsubTypeExp = Group(constraintOps + integer("hops") + expression)("nsubTypeExp")
 stringExp = Group(stringOp + string + expression)("stringExp")
+
 # NOTE: There is no way to differentiate the parens(expression) below with the expression abov
-# concOrExp = (concept ^ parens(expression))
-concOrExp = concept("concept")
+concOrExp = concept("concept") ^ parens(expression)("expression")
 conceptExp = (concOrExp + ZeroOrMore('+' + concOrExp) + Optional(Group(Suppress(':') + refinements))("refinements"))
 
-statement = subTypeExp ^ nsubTypeExp ^ stringExp ^ conceptExp
+statement = (subTypeExp ^ nsubTypeExp ^ stringExp ^ conceptExp)
 
-expression << infixNotation(statement, andorOperators)
+# Question: # Does "<<34014006|Viral disease| OR  ^60140068|My Virus Reset|" parse as
+#  <<
+#      Viral disease
+#      OR
+#      ^
+#        My Virus Reset
+#
+# or
+#  <<
+#      Viral disease
+#  OR
+#  ^
+#      My Virus Reset
+expression << Group(infixNotation(statement, andorOperators))("expression")
 
 # @@@ attributeName =  concept / (ws "(" expression ")" ws)
 attributeName = Group(concept ^ parens(expression))("name")
