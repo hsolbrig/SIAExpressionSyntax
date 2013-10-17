@@ -33,18 +33,18 @@ class TestString(unittest.TestCase):
     def test1(self):
 
         print string.parseString('|abc|', True)
-        print string.parseString(('|abc de* f??jk*|'))
-        #print string.parseString('|Multiple Words and ´stuff|')
+        print string.parseString('|abc de* f??jk*|', True)
+        print string.parseString('|Multiple Words and ´stuff|', True)
 
 
 class TestSCTID(unittest.TestCase):
     def testChecksum(self):
-        self.assertEqual(sctId.parseString('74400008').sctId, 74400008)
+        self.assertEqual(sctId.parseString('74400008', True).sctId, 74400008)
         self.assertRaises(ParseException, sctId.parseString, '74400007')
 
     def testLength(self):
         self.assertRaises(ParseException, sctId.parseString, '12345')
-        self.assertEqual(sctId.parseString('123456789012345679').sctId, 123456789012345679)
+        self.assertEqual(sctId.parseString('123456789012345679', True).sctId, 123456789012345679)
         self.assertRaises(ParseException, sctId.parseString, '1234567890123456789')
 
     def testNumeric(self):
@@ -53,42 +53,41 @@ class TestSCTID(unittest.TestCase):
 
 class TestConcept(unittest.TestCase):
     def testSimple(self):
-        self.assertEqual(concept.parseString('74400008').conceptId, 74400008)
-        t1 = (concept).parseString('74400008 | Ack A mouse |')
-        self.assertEqual(t1.conceptId, 74400008)
-        self.assertEqual(t1.term, 'Ack A mouse')
-        self.assertEqual((concept).parseString('74400008 | Appendicitis  (Finding) |').term, 'Appendicitis  (Finding)')
+        self.assertEqual(concept.parseString('74400008', True).concept.sctId, 74400008)
+        t1 = (concept).parseString('74400008 | Ack A mouse |', True)
+        self.assertEqual(t1.concept.sctId, 74400008)
+        self.assertEqual(t1.concept.term, 'Ack A mouse')
+        self.assertEqual((concept).parseString('74400008 | Appendicitis  (Finding) |', True).concept.term, 'Appendicitis  (Finding)')
         for e in ['all', 'fullydefined', 'primitive', 'active']:
-            self.assertEqual((concept).parseString(' %s ' % e).namedRefSet, e)
+            self.assertEqual(concept.parseString(' %s ' % e, True).namedRefset, e)
 
 class TestSubtypeExp(unittest.TestCase):
     def test1(self):
         for i in ['^','!', '<','<<','>','>>']:
-            print expression.parseString('%s 74400008' % i, parseAll=True)
+            print expression.parseString('%s 74400008' % i, True)
 
     def test2(self):
-        print expression.parseString('<< (74400008)')
-        print expression.parseString('(<< (74400008))')
+        print expression.parseString('<< (74400008)', True)
+        print expression.parseString('(<< (74400008))', True)
 
 class TestStringExp(unittest.TestCase):
     def test1(self):
         print expression.parseString('filterOnMatch |abcde fg| 74400008', True)
-        # There is something truly horrible about this call in a debug environment
-        # Question - are expressions cumulative?
-        print expression.parseString('filterOnNoMatch |A.*| all')
+        print expression.parseString('filterOnNoMatch |A.*| all', True)
 
 class TestAndOrExp(unittest.TestCase):
     def test1(self):
         # expression.setDebug()
         #print expression.parseString('filterOnMatch |abcde fg| 74400008 OR 7450006', True)
-        print expression.parseString('74400008 AND 7450006', parseAll=True)
-        print expression.parseString('(<<* 3 74400008) OR  7450006', True)
+        print expression.parseString('74400008 AND 7450006', True)
+        # This seems to take a really long time
+        #print expression.parseString('(<<* 3 74400008) OR  7450006', True)
 
 
 class TestRefinements(unittest.TestCase):
     def test1(self):
         conceptExp.setDebug()
-        #print conceptExp.parseString('<<(418925002|Immune hypersensitivity reaction|) :246075003|Causitive agent| =all')
+        #print conceptExp.parseString('<<(418925002|Immune hypersensitivity reaction|) :246075003|Causitive agent| =all', True)
 
 class TestNSubtypeExp(unittest.TestCase):
     def testNoInt(self):
@@ -97,23 +96,23 @@ class TestNSubtypeExp(unittest.TestCase):
 
     def test1(self):
         for i in ['<*','<<*','>*','>>*','top','tail']:
-            print expression.parseString('%s 3 74400008' % i, parseAll=True)
+            print expression.parseString('%s 3 74400008' % i, True)
         for i in range(0, 10000000000, 999999999):
-            print expression.parseString('<* %d 74400008' % i, parseAll=True)
+            print expression.parseString('<* %d 74400008' % i, True)
 
     def test2(self):
-        print expression.parseString('<<* 5 (74400008)')
-        print expression.parseString('(>>* 5 (> 74400008))')
+        print expression.parseString('<<* 5 (74400008)', True)
+        print expression.parseString('(>>* 5 (> 74400008))', True)
 
 
 class TestExpression(unittest.TestCase):
     def testSimple(self):
-        self.assertEqual(expression.parseString('74400008', parseAll=True).statement.conceptId, 74400008)
+        t1 = expression.parseString('74400008', True)
+        self.assertEqual(expression.parseString('74400008', True).expression.concept.sctId, 74400008)
 
     def testParens(self):
-        print (andor(sctId)).parseString('74400008 OR 74400008', parseAll=True)
-        print (parens(sctId)).parseString('( 74400008 )', parseAll=True)
-        print (expression).parseString('( 74400008 )', parseAll=True)
+        print (parens(sctId)).parseString('( 74400008 )', True)
+        print (expression).parseString('( 74400008 )', True)
 
 
 

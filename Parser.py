@@ -43,7 +43,7 @@ string = Suppress('|') + Group(OneOrMore( (Word(nonstarnonbar) + Optional('*')).
 # This is built in.  We need to check the rules but we would propose matching standard parsers
 
 # @@@ integer is not defined in the spec.
-# Question: We're assuming non-negative (should it be positive?
+# Question: We're assuming non-negative (should it be positive)?
 integer = Word(nums).setParseAction(lambda n: int(n[0]))
 # @@@ digit= %x30-39
 digit = nums
@@ -79,10 +79,10 @@ subTypeOps = (vsOp ^ complementOp ^ subTypeOp ^ pSubTypeOp ^ superTypeOp ^ pSupe
 # @@@ binaryOperator = “>>*” / “>*” / “<*” / “<<*” / “top” / “tail”
 # Question: 'top' and 'tail' are only meaningful if there is some sort of ordering, no?  It definitely needs
 #           further explanation
-nsubTypeOp = nft('<*', 'subtypes')
-npSubTypeOp = nft('<<*', 'subtypesAndBase')
-nsuperTypeOp = nft('>>*','supertypesAndBase')
-npSuperTypeOp = nft('>*',"supertypes")
+nsubTypeOp = nft('<*', 'nsubtypes')
+npSubTypeOp = nft('<<*', 'nsubtypesAndBase')
+nsuperTypeOp = nft('>>*','nsupertypesAndBase')
+npSuperTypeOp = nft('>*',"nsupertypes")
 ntop = nft('top','top')
 ntail = nft('tail','tail')
 constraintOps = (nsubTypeOp ^ npSubTypeOp ^ npSuperTypeOp ^ nsuperTypeOp ^ ntop  ^ ntail)("operator")
@@ -97,7 +97,7 @@ def validateSCTID(num):
     return num
 
 
-sctId   = Word(digitNonZero,digit,6,18).setParseAction(lambda n:validateSCTID(int(n[0])))('sctId')
+sctId   = Word(digitNonZero,digit,5,17).setParseAction(lambda n:validateSCTID(int(n[0])))('sctId')
 # @@@ term = 1*nonwsnonpipe *( 1*SP 1*nonwsnonpipe )
 term = OneOrMore(Word(nonwsnonpipe + ' ')).setParseAction(lambda n:''.join(n).strip()).setResultsName('term')
 concept = Group((sctId("sctId") + Optional(pipes(term("term")))))("concept") ^ namedRefSet("namedRefset")
@@ -111,10 +111,9 @@ refinements = Forward()
 #                    “(“ expression “)” ) *("+" (concept / “(“ expression “)” ) [":" ws refinements]
 # Question: is '<< << 74400008 valid?'
 subTypeExp = Group(subTypeOps + expression)("subTypeExp")
-nsubTypeExp = Group(constraintOps + integer("hops") + expression)("nsubTypeExp")
+nsubTypeExp = Group(constraintOps + integer("integer") + expression)("nsubTypeExp")
 stringExp = Group(stringOp + string + expression)("stringExp")
 
-# NOTE: There is no way to differentiate the parens(expression) below with the expression abov
 concOrExp = concept("concept") ^ parens(expression)("expression")
 conceptExp = (concOrExp + ZeroOrMore('+' + concOrExp) + Optional(Group(Suppress(':') + refinements))("refinements"))
 
@@ -136,15 +135,15 @@ statement = (subTypeExp ^ nsubTypeExp ^ stringExp ^ conceptExp)
 expression << Group(infixNotation(statement, andorOperators))("expression")
 
 # @@@ attributeName =  concept / (ws "(" expression ")" ws)
-attributeName = Group(concept ^ parens(expression))("name")
+attributeName = Group(concept ^ parens(expression)("expression"))("name")
 # @@@ attributeValue = concept / (ws "(" expression ")" ws)
-attributeValue = Group(concept ^ parens(expression))("value")
+attributeValue = Group(concept ^ parens(expression)("expression"))("value")
 # @@@ attribute = attributeName "=" attributeValue
 attribute = Group(attributeName + Suppress('=') + attributeValue)("attribute")
 # @@@ attributeSet = “(“ attributeSet “)” / attributeSet (“AND” / “OR” ) attributeSet / attribute *("," attribute)
-attributeSet = infixNotation((attribute + ZeroOrMore(',' + attribute)), andorOperators)
+attributeSet = infixNotation((attribute + ZeroOrMore(Suppress(',') + attribute)), andorOperators)
 # @@@ attributeGroup = “(“ attributeGroup “)” / attributeGroup (“AND” / “OR” ) attributeGroup / "{" attributeSet "}" ws
-attributeGroup = infixNotation((Suppress('{') + attributeSet + Suppress('}')), andorOperators)("group")
+attributeGroup = infixNotation(Group(Suppress('{') + attributeSet + Suppress('}'))("group"), andorOperators)
 # @@@ refinements = “(“ refinements “)” / refinements ( “AND” / “OR” ) refinements / ( attributeSet *attributeGroup ) / 1*attributeGroup
 attributeRefinements = (attributeSet + ZeroOrMore(attributeGroup)) ^ attributeGroup
 refinements << infixNotation(attributeRefinements, andorOperators)
