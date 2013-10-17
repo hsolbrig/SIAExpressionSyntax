@@ -86,7 +86,8 @@ class TestAndOrExp(unittest.TestCase):
 
 class TestRefinements(unittest.TestCase):
     def test1(self):
-        print expression.parseString('<<(418925002|Immune hypersensitivity reaction|) :246075003|Causitive agent| =all', True)
+        # TODO: This still fails -- needs review
+        print expression.parseString('<<(418925002|Immune hypersensitivity reaction| :246075003|Causitive agent| =all)', True)
 
 class TestNSubtypeExp(unittest.TestCase):
     def testNoInt(self):

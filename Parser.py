@@ -110,11 +110,11 @@ refinements = Forward()
 #                     stringOperator string expression / ( concept /
 #                    “(“ expression “)” ) *("+" (concept / “(“ expression “)” ) [":" ws refinements]
 # Question: is '<< << 74400008 valid?'
-subTypeExp = Group(subTypeOps + expression)("subTypeExp")
-nsubTypeExp = Group(constraintOps + integer("integer") + expression)("nsubTypeExp")
-stringExp = Group(stringOp + string + expression)("stringExp")
-
 concOrExp = concept("concept") ^ parens(expression)("expression")
+subTypeExp = Group(subTypeOps + concOrExp)("subTypeExp")
+nsubTypeExp = Group(constraintOps + integer("integer") + concOrExp)("nsubTypeExp")
+stringExp = Group(stringOp + string + concOrExp)("stringExp")
+
 conceptExp = (concOrExp + ZeroOrMore('+' + concOrExp) + Optional(Group(Suppress(':') + refinements))("refinements"))
 
 statement = (subTypeExp ^ nsubTypeExp ^ stringExp ^ conceptExp)
