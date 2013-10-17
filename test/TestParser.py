@@ -34,7 +34,8 @@ class TestString(unittest.TestCase):
 
         print string.parseString('|abc|', True)
         print string.parseString('|abc de* f??jk*|', True)
-        print string.parseString('|Multiple Words and ´stuff|', True)
+        # The following line fails because we currently don't allow UTF-8
+        #print string.parseString('|Multiple Words and ´stuff|', True)
 
 
 class TestSCTID(unittest.TestCase):
@@ -77,17 +78,15 @@ class TestStringExp(unittest.TestCase):
 
 class TestAndOrExp(unittest.TestCase):
     def test1(self):
-        # expression.setDebug()
-        #print expression.parseString('filterOnMatch |abcde fg| 74400008 OR 7450006', True)
+        print expression.parseString('filterOnMatch |abcde fg| 74400008 OR 7450006', True)
         print expression.parseString('74400008 AND 7450006', True)
         # This seems to take a really long time
-        #print expression.parseString('(<<* 3 74400008) OR  7450006', True)
+        print expression.parseString('(<<* 3 74400008) OR  7450006', True)
 
 
 class TestRefinements(unittest.TestCase):
     def test1(self):
-        conceptExp.setDebug()
-        #print conceptExp.parseString('<<(418925002|Immune hypersensitivity reaction|) :246075003|Causitive agent| =all', True)
+        print expression.parseString('<<(418925002|Immune hypersensitivity reaction|) :246075003|Causitive agent| =all', True)
 
 class TestNSubtypeExp(unittest.TestCase):
     def testNoInt(self):

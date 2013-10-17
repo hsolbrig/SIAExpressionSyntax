@@ -97,7 +97,7 @@ def validateSCTID(num):
     return num
 
 
-sctId   = Word(digitNonZero,digit,5,17).setParseAction(lambda n:validateSCTID(int(n[0])))('sctId')
+sctId   = Word(digitNonZero,digit,6,18).setParseAction(lambda n:validateSCTID(int(n[0])))('sctId')
 # @@@ term = 1*nonwsnonpipe *( 1*SP 1*nonwsnonpipe )
 term = OneOrMore(Word(nonwsnonpipe + ' ')).setParseAction(lambda n:''.join(n).strip()).setResultsName('term')
 concept = Group((sctId("sctId") + Optional(pipes(term("term")))))("concept") ^ namedRefSet("namedRefset")
