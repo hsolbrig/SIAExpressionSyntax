@@ -1,0 +1,459 @@
+{
+  "chapter11": {
+    "expression": [
+      {
+        "expression": {
+          "subTypeExp": {
+            "operator": "subtypesAndBase",
+            "concept": {
+              "sctId": "404684003",
+              "term": "Clinical finding"
+            }
+          }
+        }
+      },
+      {
+        "expression": {
+          "subTypeExp": {
+            "subTypeExp": {
+              "operator": "subtypesAndBase",
+              "concept": {
+                "sctId": "404684003",
+                "term": "Clinical finding"
+              }
+            },
+            "setop": "AND",
+            "namedRefset": "fullydefined"
+          }
+        }
+      },
+      {
+        "expression": {
+          "nsubTypeExp": {
+            "operator": "nsubtypesAndBase",
+            "integer": "3",
+            "concept": {
+              "sctId": "404684003",
+              "term": "Clinical finding"
+            }
+          }
+        }
+      },
+      {
+        "expression": {
+          "subTypeExp": {
+            "operator": "subtypesAndBase",
+            "expression": {
+              "expression": {
+                "concept": {
+                  "sctId": "418925002",
+                  "term": "Immune hypersensitivity\n                                reaction"
+                },
+                "refinements": {
+                  "attribute": {
+                    "name": {
+                      "sctId": "246075003",
+                      "term": "Causitive agent"
+                    },
+                    "namedRefset": "all"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "expression": {
+          "namedRefset": "all",
+          "refinements": {
+            "attribute": {
+              "name": {
+                "sctId": "246075003",
+                "term": "Causitive agent"
+              },
+              "value": {
+                "sctId": "84676004",
+                "term": "Prion"
+              }
+            }
+          }
+        }
+      },
+      {
+        "expression": {
+          "namedRefset": "all"
+        }
+      },
+      {
+        "expression": {
+          "subTypeExp": {
+            "subTypeExp": [
+              {
+                "operator": "subtypesAndBase",
+                "concept": {
+                  "sctId": "34014006",
+                  "term": "Viral disease"
+                }
+              },
+              {
+                "operator": "valueset",
+                "concept": {
+                  "sctId": "60140062",
+                  "term": "My Virus Reset"
+                }
+              }
+            ],
+            "setop": "OR"
+          }
+        }
+      },
+      {
+        "expression": {
+          "namedRefset": "all",
+          "refinements": {
+            "group": {
+              "attribute": {
+                "attribute": [
+                  {
+                    "name": {
+                      "sctId": "363698007",
+                      "term": "Finding site"
+                    },
+                    "value": {
+                      "sctId": "90785001",
+                      "term": "Inguinal canal structure"
+                    }
+                  },
+                  {
+                    "name": {
+                      "sctId": "116676008",
+                      "term": "Associated morphology"
+                    },
+                    "value": {
+                      "sctId": "414402003",
+                      "term": "Hermial opening"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      {
+        "expression": {
+          "namedRefset": "all",
+          "refinements": {
+            "group": {
+              "group": [
+                {
+                  "attribute": {
+                    "attribute": [
+                      {
+                        "name": {
+                          "sctId": "363698007",
+                          "term": "Finding site"
+                        },
+                        "value": {
+                          "sctId": "90785001",
+                          "term": "Inguinal canal\n                                   structure"
+                        }
+                      },
+                      {
+                        "name": {
+                          "sctId": "116676008",
+                          "term": "Associated morphology"
+                        },
+                        "value": {
+                          "sctId": "414402003",
+                          "term": "Hermial opening"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "attribute": {
+                    "attribute": [
+                      {
+                        "name": {
+                          "sctId": "363698007",
+                          "term": "Finding site"
+                        },
+                        "value": {
+                          "sctId": "52731004",
+                          "term": "Abdominal cavity\n                                   structure"
+                        }
+                      },
+                      {
+                        "name": {
+                          "sctId": "116676008",
+                          "term": "Associated morphology"
+                        },
+                        "value": {
+                          "sctId": "414403008",
+                          "term": "Hernia"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "setop": "AND"
+            }
+          }
+        }
+      },
+      {
+        "expression": {
+          "stringExp": {
+            "ITEM": "filterOnMatch",
+            "string": {
+              "word": [
+                "chronic",
+                "c",
+                "hepatitis"
+              ]
+            },
+            "expression": {
+              "expression": {
+                "subTypeExp": {
+                  "operator": "subtypesAndBase",
+                  "concept": {
+                    "sctId": "34014006",
+                    "term": "Viral disease"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "expression": {
+          "subTypeExp": {
+            "subTypeExp": [
+              {
+                "operator": "subtypes",
+                "concept": {
+                  "sctId": "118956008",
+                  "term": "Body structure altered from its\n                            original"
+                }
+              },
+              {
+                "operator": "subtypes",
+                "concept": {
+                  "sctId": "272379006",
+                  "term": "Events"
+                }
+              },
+              {
+                "operator": "subtypes",
+                "concept": {
+                  "sctId": "413350009",
+                  "term": "Finding with explicit context"
+                }
+              },
+              {
+                "operator": "subtypes",
+                "concept": {
+                  "sctId": "57177007",
+                  "term": "Family history of"
+                }
+              },
+              {
+                "operator": "subtypes",
+                "concept": {
+                  "sctId": "4908009",
+                  "term": "Past history of"
+                }
+              }
+            ],
+            "setop": [
+              "OR",
+              "OR",
+              "OR",
+              "OR",
+              "OR"
+            ],
+            "expression": {
+              "expression": {
+                "subTypeExp": {
+                  "subTypeExp": [
+                    {
+                      "operator": "subtypes",
+                      "concept": {
+                        "sctId": "404684003",
+                        "term": "Clinical finding"
+                      }
+                    },
+                    {
+                      "operator": "complement",
+                      "expression": {
+                        "expression": {
+                          "subTypeExp": {
+                            "subTypeExp": [
+                              {
+                                "operator": "subtypes",
+                                "concept": {
+                                  "sctId": "307824009",
+                                  "term": "Administrative\n                                   statuses"
+                                }
+                              },
+                              {
+                                "operator": "subtypes",
+                                "concept": {
+                                  "sctId": "405533003",
+                                  "term": "Adverse incident outcome\n                                   categories"
+                                }
+                              },
+                              {
+                                "operator": "subtypes",
+                                "concept": {
+                                  "sctId": "420134006",
+                                  "term": "Propensity to adverse\n                                   reactions"
+                                }
+                              },
+                              {
+                                "operator": "subtypes",
+                                "concept": {
+                                  "sctId": "365858006",
+                                  "term": "Prognosis/outlook\n                                   finding"
+                                }
+                              },
+                              {
+                                "operator": "subtypes",
+                                "concept": {
+                                  "sctId": "285153007",
+                                  "term": "Sequelae of external causes\n                                   and disorders"
+                                }
+                              }
+                            ],
+                            "setop": [
+                              "OR",
+                              "OR",
+                              "OR",
+                              "OR"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "setop": "AND"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "expression": {
+          "expression": {
+            "expression": {
+              "subTypeExp": {
+                "operator": "subtypes",
+                "concept": {
+                  "sctId": "404684003",
+                  "term": "Clinical finding"
+                }
+              }
+            }
+          },
+          "refinements": {
+            "attribute": {
+              "attribute": [
+                {
+                  "name": {
+                    "sctId": "116676008",
+                    "term": "Associated morphology"
+                  },
+                  "value": {
+                    "expression": {
+                      "subTypeExp": {
+                        "operator": "subtypesAndBase",
+                        "concept": {
+                          "sctId": "23583003",
+                          "term": "Inflammation"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "name": {
+                    "sctId": "363698007",
+                    "term": "Finding site"
+                  },
+                  "value": {
+                    "expression": {
+                      "subTypeExp": {
+                        "operator": "subtypesAndBase",
+                        "concept": {
+                          "sctId": "39352004",
+                          "term": "Joint structure"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "name": {
+                    "sctId": "246075003",
+                    "term": "Causative agent"
+                  },
+                  "value": {
+                    "expression": {
+                      "subTypeExp": {
+                        "operator": "subtypesAndBase",
+                        "concept": {
+                          "sctId": "410607006",
+                          "term": "Organism"
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "expression": {
+          "expression": {
+            "expression": {
+              "subTypeExp": {
+                "operator": "valueset",
+                "concept": {
+                  "sctId": "4021000036102",
+                  "term": "Specimen type reference set"
+                }
+              }
+            }
+          },
+          "refinements": {
+            "attribute": {
+              "name": {
+                "sctId": "370133003",
+                "term": "Specimen substance"
+              },
+              "value": {
+                "expression": {
+                  "subTypeExp": {
+                    "operator": "subtypes",
+                    "concept": {
+                      "sctId": "406455002",
+                      "term": "Allergen class"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

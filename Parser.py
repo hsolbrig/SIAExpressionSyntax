@@ -105,46 +105,48 @@ concept = Group((sctId("sctId") + Optional(pipes(term("term")))))("concept") ^ n
 expression = Forward()
 refinements = Forward()
 
+# =====================
+# Expression Section
+# =====================
 # @@ expression =  “(“ expression “)” / expression ( “AND” / “OR” ) expression /
 #                     unaryOperator expression / integerOperator integer expression /
 #                     stringOperator string expression / ( concept /
 #                    “(“ expression “)” ) *("+" (concept / “(“ expression “)” ) [":" ws refinements]
-# Question: is '<< << 74400008 valid?'
-concOrExp = concept("concept") ^ parens(expression)("expression")
-subTypeExp = Group(subTypeOps + concOrExp)("subTypeExp")
-nsubTypeExp = Group(constraintOps + integer("integer") + concOrExp)("nsubTypeExp")
-stringExp = Group(stringOp + string + concOrExp)("stringExp")
 
-conceptExp = (concOrExp + ZeroOrMore('+' + concOrExp) + Optional(Group(Suppress(':') + refinements))("refinements"))
+# concept / “(“ expression “)”
+conceptOrParenExp = concept("concept") | parens(expression)("expression")
+# unaryOperator expression
+subTypeExp = Group(subTypeOps + conceptOrParenExp)("subTypeExp")
+# integerOperator integer expression
+nsubTypeExp = Group(constraintOps + integer("integer") + conceptOrParenExp)("nsubTypeExp")
+# stringOperator string expression
+stringExp = Group(stringOp + string + conceptOrParenExp)("stringExp")
+# ( concept / “(“ expression “)” ) *("+" (concept / “(“ expression “)” ) [":" ws refinements]
+conceptOrParenList = conceptOrParenExp + ZeroOrMore('+' + conceptOrParenExp)
+refinementsClause = Optional(Group(Suppress(':') + refinements)("refinements"))
+conceptExp = (conceptOrParenList + refinementsClause)
 
-statement = (subTypeExp ^ nsubTypeExp ^ stringExp ^ conceptExp)
-
-# Question: # Does "<<34014006|Viral disease| OR  ^60140068|My Virus Reset|" parse as
-#  <<
-#      Viral disease
-#      OR
-#      ^
-#        My Virus Reset
-#
-# or
-#  <<
-#      Viral disease
-#  OR
-#  ^
-#      My Virus Reset
+statement = (subTypeExp ^ nsubTypeExp ^ stringExp ^ conceptExp)("statement")
 expression << Group(infixNotation(statement, andorOperators))("expression")
 
+# ====================
+# Refinements Section
+# =====================
+
 # @@@ attributeName =  concept / (ws "(" expression ")" ws)
-attributeName = Group(concept ^ parens(expression)("expression"))("name")
 # @@@ attributeValue = concept / (ws "(" expression ")" ws)
-attributeValue = Group(concept ^ parens(expression)("expression"))("value")
 # @@@ attribute = attributeName "=" attributeValue
-attribute = Group(attributeName + Suppress('=') + attributeValue)("attribute")
 # @@@ attributeSet = “(“ attributeSet “)” / attributeSet (“AND” / “OR” ) attributeSet / attribute *("," attribute)
-attributeSet = infixNotation((attribute + ZeroOrMore(Suppress(',') + attribute)), andorOperators)
-# @@@ attributeGroup = “(“ attributeGroup “)” / attributeGroup (“AND” / “OR” ) attributeGroup / "{" attributeSet "}" ws
+# @@@ attributeGroup = “(“ attributeGroup “)” / attributeGroup (“AND” / “OR” ) attributeGroup /
+#                      "{" attributeSet "}" ws
+# @@@ refinements = “(“ refinements “)” / refinements ( “AND” / “OR” ) refinements /
+#                   ( attributeSet *attributeGroup ) / 1*attributeGroup
+
+attributeName = conceptOrParenExp("name")
+attributeValue = conceptOrParenExp("value")
+attribute = Group(attributeName + Suppress('=') + attributeValue)("attribute")
+attributeSet = infixNotation(attribute, andorOperators + [(Suppress(','), 2, opAssoc.LEFT)])
 attributeGroup = infixNotation(Group(Suppress('{') + attributeSet + Suppress('}'))("group"), andorOperators)
-# @@@ refinements = “(“ refinements “)” / refinements ( “AND” / “OR” ) refinements / ( attributeSet *attributeGroup ) / 1*attributeGroup
 attributeRefinements = (attributeSet + ZeroOrMore(attributeGroup)) ^ attributeGroup
 refinements << infixNotation(attributeRefinements, andorOperators)
 

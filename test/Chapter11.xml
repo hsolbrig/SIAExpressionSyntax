@@ -1,0 +1,659 @@
+<chapter11> 
+    <!-- <<404684003|Clinical finding| -->
+    <expression>
+        <expression>
+            <statement>
+                <operator>subtypesAndBase</operator>
+                <concept>
+                    <sctId>404684003</sctId>
+                    <term>Clinical finding</term>
+                </concept>
+            </statement>
+        </expression>
+    </expression>
+    <!-- <<404684003|Clinical finding| AND fullydefined  -->
+    <expression>
+        <expression>
+            <statement>
+                <statement>
+                    <operator>subtypesAndBase</operator>
+                    <concept>
+                        <sctId>404684003</sctId>
+                        <term>Clinical finding</term>
+                    </concept>
+                </statement>
+                <setop>AND</setop>
+                <namedRefset>fullydefined</namedRefset>
+            </statement>
+        </expression>
+    </expression>
+    <!-- <<*3 404684003|Clinical finding|    -->
+    <expression>
+        <expression>
+            <nsubTypeExp>
+                <operator>nsubtypesAndBase</operator>
+                <integer>3</integer>
+                <concept>
+                    <sctId>404684003</sctId>
+                    <term>Clinical finding</term>
+                </concept>
+            </nsubTypeExp>
+        </expression>
+    </expression>
+    <!-- <<(418925002|Immune hypersensitivity reaction| :246075003|Causitive agent| =all) -->
+    <expression>
+        <expression>
+            <statement>
+                <operator>subtypesAndBase</operator>
+                <expression>
+                    <expression>
+                        <statement>
+                            <sctId>418925002</sctId>
+                            <term>Immune hypersensitivity reaction</term>
+                        </statement>
+                        <refinements>
+                            <attribute>
+                                <name>
+                                    <sctId>246075003</sctId>
+                                    <term>Causitive agent</term>
+                                </name>
+                                <namedRefset>all</namedRefset>
+                            </attribute>
+                        </refinements>
+                    </expression>
+                </expression>
+            </statement>
+        </expression>
+    </expression>
+    <!-- all: 246075003|Causitive agent| = 84676004|Prion|   -->
+    <expression>
+        <expression>
+            <statement>all</statement>
+            <refinements>
+                <attribute>
+                    <name>
+                        <sctId>246075003</sctId>
+                        <term>Causitive agent</term>
+                    </name>
+                    <value>
+                        <sctId>84676004</sctId>
+                        <term>Prion</term>
+                    </value>
+                </attribute>
+            </refinements>
+        </expression>
+    </expression>
+    <!-- all  -->
+    <expression>
+        <expression>
+            <statement>all</statement>
+        </expression>
+    </expression>
+    <!-- <<34014006|Viral disease| OR  ^60140062|My Virus Reset|  -->
+    <expression>
+        <expression>
+            <statement>
+                <statement>
+                    <operator>subtypesAndBase</operator>
+                    <concept>
+                        <sctId>34014006</sctId>
+                        <term>Viral disease</term>
+                    </concept>
+                </statement>
+                <setop>OR</setop>
+                <statement>
+                    <operator>valueset</operator>
+                    <concept>
+                        <sctId>60140062</sctId>
+                        <term>My Virus Reset</term>
+                    </concept>
+                </statement>
+            </statement>
+        </expression>
+    </expression>
+    <!-- all:{ 363698007|Finding site| = 90785001|Inguinal canal structure|,
+   116676008|Associated morphology| = 414402003|Hermial opening|} -->
+    <expression>
+        <expression>
+            <statement>all</statement>
+            <refinements>
+                <group>
+                    <attribute>
+                        <attribute>
+                            <name>
+                                <sctId>363698007</sctId>
+                                <term>Finding site</term>
+                            </name>
+                            <value>
+                                <sctId>90785001</sctId>
+                                <term>Inguinal canal structure</term>
+                            </value>
+                        </attribute>
+                        <attribute>
+                            <name>
+                                <sctId>116676008</sctId>
+                                <term>Associated morphology</term>
+                            </name>
+                            <value>
+                                <sctId>414402003</sctId>
+                                <term>Hermial opening</term>
+                            </value>
+                        </attribute>
+                    </attribute>
+                </group>
+            </refinements>
+        </expression>
+    </expression>
+    <!-- all:({363698007|Finding site| = 90785001|Inguinal canal structure|,
+116676008|Associated morphology| = 414402003|Hermial opening|}
+	AND {363698007|Finding site| = 52731004|Abdominal cavity structure|,
+	116676008|Associated morphology| = 414403008|Hernia|}) -->
+    <expression>
+        <expression>
+            <statement>all</statement>
+            <refinements>
+                <group>
+                    <group>
+                        <attribute>
+                            <attribute>
+                                <name>
+                                    <sctId>363698007</sctId>
+                                    <term>Finding site</term>
+                                </name>
+                                <value>
+                                    <sctId>90785001</sctId>
+                                    <term>Inguinal canal structure</term>
+                                </value>
+                            </attribute>
+                            <attribute>
+                                <name>
+                                    <sctId>116676008</sctId>
+                                    <term>Associated morphology</term>
+                                </name>
+                                <value>
+                                    <sctId>414402003</sctId>
+                                    <term>Hermial opening</term>
+                                </value>
+                            </attribute>
+                        </attribute>
+                    </group>
+                    <setop>AND</setop>
+                    <group>
+                        <attribute>
+                            <attribute>
+                                <name>
+                                    <sctId>363698007</sctId>
+                                    <term>Finding site</term>
+                                </name>
+                                <value>
+                                    <sctId>52731004</sctId>
+                                    <term>Abdominal cavity structure</term>
+                                </value>
+                            </attribute>
+                            <attribute>
+                                <name>
+                                    <sctId>116676008</sctId>
+                                    <term>Associated morphology</term>
+                                </name>
+                                <value>
+                                    <sctId>414403008</sctId>
+                                    <term>Hernia</term>
+                                </value>
+                            </attribute>
+                        </attribute>
+                    </group>
+                </group>
+            </refinements>
+        </expression>
+    </expression>
+    <!-- filterOnMatch |chronic c hepatitis| (<<34014006|Viral disease|) -->
+    <expression>
+        <expression>
+            <statement>
+                <ITEM>filterOnMatch</ITEM>
+                <string>
+                    <word>chronic</word>
+                    <word>c</word>
+                    <word>hepatitis</word>
+                </string>
+                <expression>
+                    <expression>
+                        <statement>
+                            <operator>subtypesAndBase</operator>
+                            <concept>
+                                <sctId>34014006</sctId>
+                                <term>Viral disease</term>
+                            </concept>
+                        </statement>
+                    </expression>
+                </expression>
+            </statement>
+        </expression>
+    </expression>
+    <!-- <118956008|Body structure altered from its original|
+OR ( <404684003|Clinical finding|
+	AND !(<307824009|Administrative statuses|
+		OR <405533003|Adverse incident outcome categories|
+		OR <420134006|Propensity to adverse reactions|
+		OR <365858006|Prognosis/outlook finding|
+		OR <285153007|Sequelae of external causes and disorders|))
+OR <272379006|Events|
+OR <413350009|Finding with explicit context|
+OR <57177007|Family history of|
+OR <4908009|Past history of|  -->
+    <expression>
+        <expression>
+            <statement>
+                <statement>
+                    <operator>subtypes</operator>
+                    <concept>
+                        <sctId>118956008</sctId>
+                        <term>Body structure altered from its original</term>
+                    </concept>
+                </statement>
+                <setop>OR</setop>
+                <statement>
+                    <expression>
+                        <statement>
+                            <statement>
+                                <operator>subtypes</operator>
+                                <concept>
+                                    <sctId>404684003</sctId>
+                                    <term>Clinical finding</term>
+                                </concept>
+                            </statement>
+                            <setop>AND</setop>
+                            <statement>
+                                <operator>complement</operator>
+                                <expression>
+                                    <expression>
+                                        <statement>
+                                            <statement>
+                                                <operator>subtypes</operator>
+                                                <concept>
+                                                    <sctId>307824009</sctId>
+                                                    <term>Administrative statuses</term>
+                                                </concept>
+                                            </statement>
+                                            <setop>OR</setop>
+                                            <statement>
+                                                <operator>subtypes</operator>
+                                                <concept>
+                                                    <sctId>405533003</sctId>
+                                                    <term>Adverse incident outcome categories</term>
+                                                </concept>
+                                            </statement>
+                                            <setop>OR</setop>
+                                            <statement>
+                                                <operator>subtypes</operator>
+                                                <concept>
+                                                    <sctId>420134006</sctId>
+                                                    <term>Propensity to adverse reactions</term>
+                                                </concept>
+                                            </statement>
+                                            <setop>OR</setop>
+                                            <statement>
+                                                <operator>subtypes</operator>
+                                                <concept>
+                                                    <sctId>365858006</sctId>
+                                                    <term>Prognosis/outlook finding</term>
+                                                </concept>
+                                            </statement>
+                                            <setop>OR</setop>
+                                            <statement>
+                                                <operator>subtypes</operator>
+                                                <concept>
+                                                    <sctId>285153007</sctId>
+                                                    <term>Sequelae of external causes and disorders</term>
+                                                </concept>
+                                            </statement>
+                                        </statement>
+                                    </expression>
+                                </expression>
+                            </statement>
+                        </statement>
+                    </expression>
+                </statement>
+                <setop>OR</setop>
+                <statement>
+                    <operator>subtypes</operator>
+                    <concept>
+                        <sctId>272379006</sctId>
+                        <term>Events</term>
+                    </concept>
+                </statement>
+                <setop>OR</setop>
+                <statement>
+                    <operator>subtypes</operator>
+                    <concept>
+                        <sctId>413350009</sctId>
+                        <term>Finding with explicit context</term>
+                    </concept>
+                </statement>
+                <setop>OR</setop>
+                <statement>
+                    <operator>subtypes</operator>
+                    <concept>
+                        <sctId>57177007</sctId>
+                        <term>Family history of</term>
+                    </concept>
+                </statement>
+                <setop>OR</setop>
+                <statement>
+                    <operator>subtypes</operator>
+                    <concept>
+                        <sctId>4908009</sctId>
+                        <term>Past history of</term>
+                    </concept>
+                </statement>
+            </statement>
+        </expression>
+    </expression>
+    <!-- (<404684003|Clinical finding|)
+:(116676008|Associated morphology|=(<<23583003|Inflammation|),
+363698007|Finding site|=(<<39352004|Joint structure|),
+246075003|Causative agent|=(<<410607006|Organism|)) -->
+    <expression>
+        <expression>
+            <statement>
+                <expression>
+                    <statement>
+                        <operator>subtypes</operator>
+                        <concept>
+                            <sctId>404684003</sctId>
+                            <term>Clinical finding</term>
+                        </concept>
+                    </statement>
+                </expression>
+            </statement>
+            <refinements>
+                <attribute>
+                    <attribute>
+                        <name>
+                            <sctId>116676008</sctId>
+                            <term>Associated morphology</term>
+                        </name>
+                        <value>
+                            <expression>
+                                <statement>
+                                    <operator>subtypesAndBase</operator>
+                                    <concept>
+                                        <sctId>23583003</sctId>
+                                        <term>Inflammation</term>
+                                    </concept>
+                                </statement>
+                            </expression>
+                        </value>
+                    </attribute>
+                    <attribute>
+                        <name>
+                            <sctId>363698007</sctId>
+                            <term>Finding site</term>
+                        </name>
+                        <value>
+                            <expression>
+                                <statement>
+                                    <operator>subtypesAndBase</operator>
+                                    <concept>
+                                        <sctId>39352004</sctId>
+                                        <term>Joint structure</term>
+                                    </concept>
+                                </statement>
+                            </expression>
+                        </value>
+                    </attribute>
+                    <attribute>
+                        <name>
+                            <sctId>246075003</sctId>
+                            <term>Causative agent</term>
+                        </name>
+                        <value>
+                            <expression>
+                                <statement>
+                                    <operator>subtypesAndBase</operator>
+                                    <concept>
+                                        <sctId>410607006</sctId>
+                                        <term>Organism</term>
+                                    </concept>
+                                </statement>
+                            </expression>
+                        </value>
+                    </attribute>
+                </attribute>
+            </refinements>
+        </expression>
+    </expression>
+    <!-- (^4021000036102|Specimen type reference set|)
+:370133003|Specimen substance|=(<406455002|Allergen class|) -->
+    <expression>
+        <expression>
+            <statement>
+                <expression>
+                    <statement>
+                        <operator>valueset</operator>
+                        <concept>
+                            <sctId>4021000036102</sctId>
+                            <term>Specimen type reference set</term>
+                        </concept>
+                    </statement>
+                </expression>
+            </statement>
+            <refinements>
+                <attribute>
+                    <name>
+                        <sctId>370133003</sctId>
+                        <term>Specimen substance</term>
+                    </name>
+                    <value>
+                        <expression>
+                            <statement>
+                                <operator>subtypes</operator>
+                                <concept>
+                                    <sctId>406455002</sctId>
+                                    <term>Allergen class</term>
+                                </concept>
+                            </statement>
+                        </expression>
+                    </value>
+                </attribute>
+            </refinements>
+        </expression>
+    </expression>
+    <!-- (<64572001|Disease|):(116676008|Associated morphology|=(<<37782003|Damage|),
+	363698007|Finding site|=
+		(!(<<123037004|Body structure|
+		AND !(<<91723000|Anatomical structure|)))) -->
+    <expression>
+        <expression>
+            <statement>
+                <expression>
+                    <statement>
+                        <operator>subtypes</operator>
+                        <concept>
+                            <sctId>64572001</sctId>
+                            <term>Disease</term>
+                        </concept>
+                    </statement>
+                </expression>
+            </statement>
+            <refinements>
+                <attribute>
+                    <attribute>
+                        <name>
+                            <sctId>116676008</sctId>
+                            <term>Associated morphology</term>
+                        </name>
+                        <value>
+                            <expression>
+                                <statement>
+                                    <operator>subtypesAndBase</operator>
+                                    <concept>
+                                        <sctId>37782003</sctId>
+                                        <term>Damage</term>
+                                    </concept>
+                                </statement>
+                            </expression>
+                        </value>
+                    </attribute>
+                    <attribute>
+                        <name>
+                            <sctId>363698007</sctId>
+                            <term>Finding site</term>
+                        </name>
+                        <value>
+                            <expression>
+                                <statement>
+                                    <operator>complement</operator>
+                                    <expression>
+                                        <expression>
+                                            <statement>
+                                                <statement>
+                                                    <operator>subtypesAndBase</operator>
+                                                    <concept>
+                                                        <sctId>123037004</sctId>
+                                                        <term>Body structure</term>
+                                                    </concept>
+                                                </statement>
+                                                <setop>AND</setop>
+                                                <statement>
+                                                    <operator>complement</operator>
+                                                    <expression>
+                                                        <expression>
+                                                            <statement>
+                                                                <operator>subtypesAndBase</operator>
+                                                                <concept>
+                                                                    <sctId>91723000</sctId>
+                                                                    <term>Anatomical structure</term>
+                                                                </concept>
+                                                            </statement>
+                                                        </expression>
+                                                    </expression>
+                                                </statement>
+                                            </statement>
+                                        </expression>
+                                    </expression>
+                                </statement>
+                            </expression>
+                        </value>
+                    </attribute>
+                </attribute>
+            </refinements>
+        </expression>
+    </expression>
+    <!-- (<373873005|Pharmaceutical / biologic product|)
+	: 127489000|Has active ingredient|=(<<372687004|Amoxicillin|)
+	AND (127489000|Has active ingredient|=(<<395938000|Clavulanate|)) -->
+    <expression>
+        <expression>
+            <statement>
+                <expression>
+                    <statement>
+                        <operator>subtypes</operator>
+                        <concept>
+                            <sctId>373873005</sctId>
+                            <term>Pharmaceutical / biologic product</term>
+                        </concept>
+                    </statement>
+                </expression>
+            </statement>
+            <refinements>
+                <attribute>
+                    <attribute>
+                        <name>
+                            <sctId>127489000</sctId>
+                            <term>Has active ingredient</term>
+                        </name>
+                        <value>
+                            <expression>
+                                <statement>
+                                    <operator>subtypesAndBase</operator>
+                                    <concept>
+                                        <sctId>372687004</sctId>
+                                        <term>Amoxicillin</term>
+                                    </concept>
+                                </statement>
+                            </expression>
+                        </value>
+                    </attribute>
+                    <setop>AND</setop>
+                    <attribute>
+                        <name>
+                            <sctId>127489000</sctId>
+                            <term>Has active ingredient</term>
+                        </name>
+                        <value>
+                            <expression>
+                                <statement>
+                                    <operator>subtypesAndBase</operator>
+                                    <concept>
+                                        <sctId>395938000</sctId>
+                                        <term>Clavulanate</term>
+                                    </concept>
+                                </statement>
+                            </expression>
+                        </value>
+                    </attribute>
+                </attribute>
+            </refinements>
+        </expression>
+    </expression>
+    <!-- (<404684003|Clinical finding|):( 246454002|Occurrence|=(255398004|Childhood| OR 3658006|Infancy|)
+AND 246075003|Causative agent|=(<409822003|Bacteria|)) -->
+    <expression>
+        <expression>
+            <statement>
+                <expression>
+                    <statement>
+                        <operator>subtypes</operator>
+                        <concept>
+                            <sctId>404684003</sctId>
+                            <term>Clinical finding</term>
+                        </concept>
+                    </statement>
+                </expression>
+            </statement>
+            <refinements>
+                <attribute>
+                    <attribute>
+                        <name>
+                            <sctId>246454002</sctId>
+                            <term>Occurrence</term>
+                        </name>
+                        <value>
+                            <expression>
+                                <statement>
+                                    <statement>
+                                        <sctId>255398004</sctId>
+                                        <term>Childhood</term>
+                                    </statement>
+                                    <setop>OR</setop>
+                                    <statement>
+                                        <sctId>3658006</sctId>
+                                        <term>Infancy</term>
+                                    </statement>
+                                </statement>
+                            </expression>
+                        </value>
+                    </attribute>
+                    <setop>AND</setop>
+                    <attribute>
+                        <name>
+                            <sctId>246075003</sctId>
+                            <term>Causative agent</term>
+                        </name>
+                        <value>
+                            <expression>
+                                <statement>
+                                    <operator>subtypes</operator>
+                                    <concept>
+                                        <sctId>409822003</sctId>
+                                        <term>Bacteria</term>
+                                    </concept>
+                                </statement>
+                            </expression>
+                        </value>
+                    </attribute>
+                </attribute>
+            </refinements>
+        </expression>
+    </expression> Process finished with exit code 0 </chapter11>

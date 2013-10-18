@@ -43,7 +43,8 @@ proc('<<404684003|Clinical finding| AND fullydefined ')
 
 proc('<<*3 404684003|Clinical finding|   ')
 
-proc('<<(418925002|Immune hypersensitivity reaction|) :246075003|Causitive agent| =all')
+# NOTE: this isn't correct in the spec, - waiting input
+proc('<<(418925002|Immune hypersensitivity reaction| :246075003|Causitive agent| =all)')
 
 proc('all: 246075003|Causitive agent| = 84676004|Prion|  ')
 
@@ -63,45 +64,44 @@ proc("""all:({363698007|Finding site| = 90785001|Inguinal canal structure|,
 # NOTE: The document has a capital 'F'
 # NOTE: The grammar doesn't allow parenthesis where they are - it is
 #       string expression (no paren string expr)
-proc("""filterOnMatch |chronic c hepatitis| <<34014006|Viral disease|""")
+proc("""filterOnMatch |chronic c hepatitis| (<<34014006|Viral disease|)""")
 
-# NOTE: Blocked out because it takes too long
-#proc("""<118956008|Body structure altered from its original|
-#OR ( <404684003|Clinical finding|
-#	AND !(<307824009|Administrative statuses|
-#		OR <405533003|Adverse incident outcome categories|
-#		OR <420134006|Propensity to adverse reactions|
-#		OR <365858006|Prognosis/outlook finding|
-#		OR <285153007|Sequelae of external causes and disorders|))
-#OR <272379006|Events|
-#OR <413350009|Finding with explicit context|
-#OR <57177007|Family history of|
-#OR <4908009|Past history of| """)
 
-# NOTE: the attribute value requires parenthesis around the expression
-# NOTE: blocked out because it takes too long
-#proc("""<404684003|Clinical finding|
-#:(116676008|Associated morphology|=(<<23583003|Inflammation|),
-#363698007|Finding site|=(<<39352004|Joint structure|),
-#246075003|Causative agent|=(<<410607006|Organism|))""")
+proc("""<118956008|Body structure altered from its original|
+OR ( <404684003|Clinical finding|
+	AND !(<307824009|Administrative statuses|
+		OR <405533003|Adverse incident outcome categories|
+		OR <420134006|Propensity to adverse reactions|
+		OR <365858006|Prognosis/outlook finding|
+		OR <285153007|Sequelae of external causes and disorders|))
+OR <272379006|Events|
+OR <413350009|Finding with explicit context|
+OR <57177007|Family history of|
+OR <4908009|Past history of| """)
+
+
+# NOTE: Edited significantly from section 11
+proc("""(<404684003|Clinical finding|)
+:(116676008|Associated morphology|=(<<23583003|Inflammation|),
+363698007|Finding site|=(<<39352004|Joint structure|),
+246075003|Causative agent|=(<<410607006|Organism|))""")
 
 # Note: parens required around value
-proc("""^4021000036102|Specimen type reference set|
+proc("""(^4021000036102|Specimen type reference set|)
 :370133003|Specimen substance|=(<406455002|Allergen class|)""")
 
 # Note: parens required around value
-proc("""<64572001|Disease|:(116676008|Associated morphology|=(<<37782003|Damage|),
+proc("""(<64572001|Disease|):(116676008|Associated morphology|=(<<37782003|Damage|),
 	363698007|Finding site|=
 		(!(<<123037004|Body structure|
-		AND !<<91723000|Anatomical structure|)))""")
+		AND !(<<91723000|Anatomical structure|))))""")
 
 # Note: parens required around value
-proc("""<373873005|Pharmaceutical / biologic product|
+proc("""(<373873005|Pharmaceutical / biologic product|)
 	: 127489000|Has active ingredient|=(<<372687004|Amoxicillin|)
 	AND (127489000|Has active ingredient|=(<<395938000|Clavulanate|))""")
 
 # Note: parens required around value
-proc("""<404684003|Clinical finding|
-	:( 246454002|Occurrence|=
-		(255398004|Childhood| OR 3658006|Infancy|))
-	AND (246075003|Causative agent|=!<409822003|Bacteria|)""")
+
+proc("""(<404684003|Clinical finding|):( 246454002|Occurrence|=(255398004|Childhood| OR 3658006|Infancy|)
+AND 246075003|Causative agent|=(<409822003|Bacteria|))""")
